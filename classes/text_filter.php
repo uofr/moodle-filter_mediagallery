@@ -23,9 +23,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace filter_medigallery;
+
 defined('MOODLE_INTERNAL') || die();
 
-class filter_mediagallery extends moodle_text_filter {
+class text_filter extends \core_filters\text_filter {
 
     private $renderer;
 
@@ -47,7 +49,7 @@ class filter_mediagallery extends moodle_text_filter {
 
         try {
             $gallery = new \mod_mediagallery\gallery($matches[1]);
-        } catch (dml_missing_record_exception $e) {
+        } catch (\dml_missing_record_exception $e) {
             $string = '';
             if (has_capability('moodle/course:manageactivities', $PAGE->context)) {
                 $string = get_string('gallerymissing', 'filter_mediagallery');
